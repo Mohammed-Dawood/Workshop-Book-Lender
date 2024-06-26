@@ -1,26 +1,64 @@
 package se.lexicon;
 
+import java.util.Scanner;
+
+import se.lexicon.model.Book;
+import se.lexicon.model.Person;
 
 public class App {
     public static void main(String[] args) {
-        // todo: needs completion
+        // Create books.
+        Book[] books = Book.createBooks();
 
-        // Create a book instance
-        // Display book information
+        // Create person instances
+        new Person("Sami", "Alabed");
+        new Person("Mohammed", "Dawood");
 
-        // Create a person instance
-        // Display person information
+        // Display all person information
+        System.out.println("Display all person information in the system: ");
+        System.out.println(Person.displayAllPersons());
 
-        // Loan a book to the person
+        // Display all book information
+        System.out.println("\nDisplay all book information in the system: ");
+        System.out.println(Book.displayAllBooks(books));
 
-        // Display person information after borrowing a book
-        // Display book information after borrowing a book
+        Scanner scanner = new Scanner(System.in);
+        boolean continueAction = true;
 
-        // Return the borrowed book
+        while (continueAction) {
+            // Ask if the user wants to loan or return a book
+            System.out.println("\nDo you want to loan or return a book? (loan/return):");
+            String action = scanner.nextLine();
 
-        // Display person information after returning the book
-        // Display book information after borrowing a book
+            if (action.equalsIgnoreCase("loan")) {
+                // Loan a book
+                Book.loanBook(books, scanner);
+            } else if (action.equalsIgnoreCase("return")) {
+                // Return a book
+                Book.returnBook(books, scanner);
+            } else {
+                System.out.println("Invalid action. Please enter 'loan' or 'return'.");
+            }
 
+            // Ask if the user wants to perform another action
+            System.out.println("\nDo you want to perform another action? (yes/no):");
+            String response = scanner.nextLine();
+
+            if (response.equalsIgnoreCase("no")) {
+                continueAction = false;
+            }
+        }
+
+        // Display all book information after loaning/returning
+        System.out.println("\nDisplay all book information after loaning/returning: ");
+        System.out.println(Book.displayAllBooks(books));
+
+        // Display the books that each person has borrowed
+        System.out.println("\nDisplay all borrowed books for each person:");
+        for (Person person : Person.getPersons()) {
+            System.out.println(person.displayBorrowedBooks());
+        }
+
+        System.out.println("Goodbye!");
     }
-
 }
