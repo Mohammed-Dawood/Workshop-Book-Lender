@@ -1,7 +1,7 @@
 package se.lexicon.model;
 
-import java.util.Scanner;
 import java.util.UUID;
+import java.util.Scanner;
 
 public class Book {
     private final String id;
